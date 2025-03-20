@@ -15,8 +15,8 @@ thì nó trả về token : eyJhbGciOiJIUzI1NiJ9.eyJyb2xlIjoiUk9MRV9VU0VSIiwic3V
 
 Xong rồi nếu ngài muốn test mấy API của admin với user thì phải gửi kèm theo cái token này thì mới truy cập được.
 
-E demo thử cái API changepassword cho User nhé : 
+**E demo thử cái API changepassword cho User nhé**: 
 
-1. Nhập token trước : ![Alt text](image/anh2.png)
+1. **Nhập token trước** : ![Alt text](image/anh2.png)
 
-2. Đổi password : ![Alt text](image/anh3.png)
+2. **Đổi password** : ![Alt text](image/anh3.png)
