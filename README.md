@@ -22,4 +22,4 @@ Xong rồi nếu ngài muốn test mấy API của admin với user thì phải 
 2. **Đổi password** : ![Alt text](image/anh3.png)
 
 
-**Final: Ngài có thể code MVC như bình thường xong r lên ChatGPT bảo nó chỉnh lại cho khớp với frontend ReactJS là nó tự generate ra RestAPI :))) Uy tín, chỉ cần chỉnh Controller thành RESTAPI th**
+**Final: Ngài có thể code MVC như bình thường xong r up Controller lên ChatGPT bảo nó chỉnh lại cho khớp với frontend ReactJS là nó tự generate ra RestAPI :))) Uy tín, chỉ cần chỉnh Controller thành RESTAPI th**
