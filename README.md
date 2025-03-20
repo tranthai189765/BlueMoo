@@ -1,6 +1,6 @@
 # BlueMoon
 
-E hướng dẫn ngài cách test API nhe
+**E hướng dẫn ngài cách test API nhe**
 
 Ngài test trên Postman vẫn như bthg nhma đầu tiên ngài cần vào http://localhost:9090/api/auth/login để lấy token đã 
 
@@ -9,7 +9,7 @@ Ví dụ ngài vào http://localhost:9090/api/auth/login, nhập {
     "password": "1234567890"
 } 
 
-thì nó trả về token : eyJhbGciOiJIUzI1NiJ9.eyJyb2xlIjoiUk9MRV9VU0VSIiwic3ViIjoiaG9hbmdkYXJrZGFvIiwiaWF0IjoxNzQyNDU3NDc2LCJleHAiOjE3NDI0NjEwNzZ9.U4kwQuAoVpcJhiaDZ9KsfXgDQ0HYiwaZ3W6L-4_mZ1g
+**thì nó trả về token : eyJhbGciOiJIUzI1NiJ9.eyJyb2xlIjoiUk9MRV9VU0VSIiwic3ViIjoiaG9hbmdkYXJrZGFvIiwiaWF0IjoxNzQyNDU3NDc2LCJleHAiOjE3NDI0NjEwNzZ9.U4kwQuAoVpcJhiaDZ9KsfXgDQ0HYiwaZ3W6L-4_mZ1g**
 
 ![Alt text](image/anh1.png)
 
