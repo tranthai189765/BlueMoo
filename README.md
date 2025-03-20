@@ -11,6 +11,12 @@ Ví dụ ngài vào http://localhost:9090/api/auth/login, nhập {
 
 thì nó trả về token : eyJhbGciOiJIUzI1NiJ9.eyJyb2xlIjoiUk9MRV9VU0VSIiwic3ViIjoiaG9hbmdkYXJrZGFvIiwiaWF0IjoxNzQyNDU3NDc2LCJleHAiOjE3NDI0NjEwNzZ9.U4kwQuAoVpcJhiaDZ9KsfXgDQ0HYiwaZ3W6L-4_mZ1g
 
+![Alt text](image/anh1.png)
+
 Xong rồi nếu ngài muốn test mấy API của admin với user thì phải gửi kèm theo cái token này thì mới truy cập được.
 
 E demo thử cái API changepassword cho User nhé : 
+
+1. Nhập token trước : ![Alt text](image/anh2.png)
+
+2. Đổi password : ![Alt text](image/anh3.png)
