@@ -13,7 +13,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 @RestController
-@CrossOrigin(origins = "http://localhost:3000") 
+@CrossOrigin
 @RequestMapping("/api/auth")
 
 public class LoginController {
