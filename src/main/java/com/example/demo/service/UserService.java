@@ -1,17 +1,23 @@
 package com.example.demo.service;
 
-import com.example.demo.dto.UserCreationRequest;
+import com.example.demo.dto.ManualUserDTO;
+import com.example.demo.dto.ResidentDTO;
+import com.example.demo.dto.UserDTO;
 import com.example.demo.entity.Resident;
 import com.example.demo.entity.User;
 import com.example.demo.repository.ResidentRepository;
 import com.example.demo.repository.UserRepository;
+import jakarta.transaction.Transactional;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
-import java.util.List;
-import java.util.Optional;
 
+import java.util.*;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 @Service
 public class UserService {
 
@@ -22,21 +28,52 @@ public class UserService {
     private ResidentRepository residentRepository;
 
     @Autowired
+    private ApartmentService apartmentService;
+
+    @Autowired
     private PasswordEncoder passwordEncoder;
 
-    public void addUser(UserCreationRequest request) {
+
+
+    public void addUser(UserDTO request) {
         Resident resident = new Resident();
         resident.setFullName(request.getFullName());
         resident.setAge(request.getAge());
         resident.setPhone(request.getPhone());
         resident.setEmail(request.getEmail());
-        resident.setApartmentId(request.getApartmentId());
+        resident.setApartmentNumbers(request.getApartmentNumbers());
+        // Định dạng ngày theo DD/MM/YY
         residentRepository.save(resident);
 
         User user = new User();
         user.setResidentId(resident.getId()); // Lấy ID sau khi lưu
         user.setName(request.getName());
         user.setPassword(passwordEncoder.encode(request.getPassword()));
+        
+        SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yy");
+        String formattedDate = dateFormat.format(new Date());      
+        user.setDateCreated(formattedDate);
+        userRepository.save(user);
+    }
+    public void addUser(ManualUserDTO request) {
+        Resident resident = new Resident();
+        resident.setFullName(request.getFullName());
+        resident.setAge(request.getAge());
+        resident.setPhone(request.getPhone());
+        resident.setEmail(request.getEmail());
+        resident.setApartmentNumbers(request.getApartmentNumbers());
+        residentRepository.save(resident);
+
+        User user = new User();
+        user.setResidentId(resident.getId()); // Lấy ID sau khi lưu
+        user.setName(request.getName());
+        user.setPassword(passwordEncoder.encode(request.getPassword()));
+        user.setRole(request.getRole());
+        
+        SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
+        String formattedDate = dateFormat.format(new Date());      
+        user.setDateCreated(formattedDate);
+        
         userRepository.save(user);
     }
 
@@ -49,6 +86,50 @@ public class UserService {
                 userRepository.save(user);
                 return true;
             }
+        }
+        return false;
+    }
+
+    public boolean deactivateUser(Long id) {
+        Optional<User> userOptional = userRepository.findById(id);
+        if (userOptional.isPresent()) {
+            User user = userOptional.get();
+            if (user.isActivation()) {
+                user.setActivation(false);
+//                System.out.println(user);
+                userRepository.save(user);
+//                System.out.println(user);
+                return true;
+            }
+        }
+        return false;
+    }
+
+    public boolean updateUser(Long id, ResidentDTO user) {
+        Optional<User> userOptional = userRepository.findById(id);
+        if (userOptional.isPresent()) {
+            User userUpdate = userOptional.get();
+            userUpdate.setRole(user.getRole());
+//            userUpdate.setPassword(passwordEncoder.encode(user.getPassword()));
+
+            userRepository.save(userUpdate);
+            return true;
+        }
+        return false;
+    }
+
+
+    public boolean deleteUser(Long id) {
+        Optional<User> userOptional = userRepository.findById(id);
+        if (userOptional.isPresent()) {
+            User user = userOptional.get();
+            Resident resident = residentRepository.findById(user.getResidentId()).orElse(null);
+            if (resident == null) {
+                return false;
+            }
+            apartmentService.deleteResident(resident);
+            userRepository.delete(user);
+            return true;
         }
         return false;
     }
@@ -69,6 +150,11 @@ public class UserService {
         return "success";
     }
 
+
+
+    public User findById(Long id) {
+        return userRepository.findById(id).orElse(null);
+    }
 
     public User getUserByName(String username) {
         return userRepository.findByName(username);

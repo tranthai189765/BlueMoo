@@ -13,7 +13,7 @@ import java.lang.annotation.Target;
 public @interface UniqueName {
     String message() default "Name already exists"; // Thông báo lỗi mặc định
 
-    Class<?>[] groups() default {}; // Nhóm validation
+    Class<?>[] groups() default {};
 
-    Class<? extends Payload>[] payload() default {}; // Payload
+    Class<? extends Payload>[] payload() default {};
 }

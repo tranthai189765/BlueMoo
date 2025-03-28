@@ -1,6 +1,7 @@
 package com.example.demo.entity;
 
 import com.example.demo.enums.BillStatus;
+import com.example.demo.enums.BillType;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -19,19 +20,26 @@ public class Bill {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @ManyToOne
-    @JoinColumn(name = "apartment_id")
-    private Apartment apartment;
+    @Column(name = "apartment_number", nullable = false)
+    private String apartmentNumber;
 
+    @Column(name = "bill_type", nullable = false)
+    @Enumerated(EnumType.STRING)
+    private BillType billType;
+
+    @Column(name = "amount", nullable = false)
     private Double amount;
 
     @Column(name = "due_date")
     private LocalDate dueDate;
 
+    @Column(name = "description")
+    private String description;
+
+    @Column(name = "status", nullable = false)
     @Enumerated(EnumType.STRING)
     private BillStatus status;
 
     @Column(name = "created_at", updatable = false)
     private LocalDateTime createdAt = LocalDateTime.now();
 }
-

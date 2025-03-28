@@ -11,7 +11,7 @@ import java.util.Map;
 
 @RestController
 @RequestMapping("/admin")
-@CrossOrigin(origins = "http://localhost:3000") // Cho phép React truy cập API
+@CrossOrigin// Cho phép React truy cập API
 public class AdminController {
     @Autowired
     private UserService userService;

@@ -5,6 +5,7 @@ import jakarta.persistence.*;
 import lombok.*;
 
 import java.util.List;
+import java.util.Set;
 
 @Entity
 @Table(name = "apartments")
@@ -18,19 +19,25 @@ public class Apartment {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @Column(name = "apartment_number", nullable = false, unique = true)
+    private String apartmentNumber;
+
     @Column(name = "room_number", nullable = false, unique = true)
     private String roomNumber;
 
     private Integer floor;
     private Double area;
 
-    @ManyToOne
-    @JoinColumn(name = "owner_id")
-    private Resident owner;
-
     @Enumerated(EnumType.STRING)
     private ApartmentStatus status;
 
-    @OneToMany(mappedBy = "apartment")
-    private List<Bill> bills;
+    @ElementCollection(fetch = FetchType.EAGER)
+    @CollectionTable(name = "apartment_bills", joinColumns = @JoinColumn(name = "apartment_id"))
+    @Column(name = "bill_id")
+    private Set<Long> billIds;
+
+    @ElementCollection(fetch = FetchType.EAGER)
+    @CollectionTable(name = "apartment_residents", joinColumns = @JoinColumn(name = "apartment_id"))
+    @Column(name = "resident_id")
+    private Set<Long> residentIds;
 }

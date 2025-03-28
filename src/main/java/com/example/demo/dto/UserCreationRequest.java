@@ -33,6 +33,6 @@ public class UserCreationRequest {
     @Email(message = "Email should be valid")
     private String email;
 
-    @NotBlank(message = "apartmentId is required")
+    @NotBlank(message = "ApartmentId is required")
     private String apartmentId;
 }

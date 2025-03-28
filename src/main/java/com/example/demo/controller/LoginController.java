@@ -35,7 +35,7 @@ public class LoginController {
             return ResponseEntity.badRequest().body(errors); 
         }
 
-        userService.addUser(request);
+        // userService.addUser(request);
         return ResponseEntity.ok("User registered successfully");
     }
 

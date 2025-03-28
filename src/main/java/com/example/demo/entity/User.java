@@ -1,5 +1,6 @@
 package com.example.demo.entity;
 
+import com.example.demo.validation.ValidPassword;
 import jakarta.persistence.*;
 import lombok.*;
 import org.springframework.security.core.GrantedAuthority;
@@ -17,21 +18,19 @@ import java.util.Collections;
 @AllArgsConstructor
 @ToString
 public class User implements UserDetails {
-    /**
-	 * 
-	 */
-	private static final long serialVersionUID = 1L;
-	private String name;
-    private String password;
-    private String role = "USER";
-
-    private boolean activation = false;
-
-    private Long residentId;
-
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+
+    private String name;
+
+    private String password;
+    private String role = "USER";
+    private String dateCreated;
+
+    private boolean activation = true;
+
+    private Long residentId;
 
 
     @Override

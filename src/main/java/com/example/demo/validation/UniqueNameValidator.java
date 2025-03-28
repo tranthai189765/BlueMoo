@@ -3,17 +3,22 @@ package com.example.demo.validation;
 import com.example.demo.repository.UserRepository;
 import jakarta.validation.ConstraintValidator;
 import jakarta.validation.ConstraintValidatorContext;
+import lombok.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 @Component
+
 public class UniqueNameValidator implements ConstraintValidator<UniqueName, String> {
+    private String message; // Lưu trữ thông báo lỗi từ annotation
+
 
     @Autowired
     private UserRepository userRepository; // Repository để truy vấn database
 
     @Override
     public void initialize(UniqueName constraintAnnotation) {
+        this.message = constraintAnnotation.message();
     }
 
     @Override
@@ -26,7 +31,7 @@ public class UniqueNameValidator implements ConstraintValidator<UniqueName, Stri
 
         if (!isUnique) {
             context.disableDefaultConstraintViolation();
-            context.buildConstraintViolationWithTemplate("Tên đã tồn tại trong hệ thống") // Thông báo lỗi tùy chỉnh
+            context.buildConstraintViolationWithTemplate(message)
                     .addConstraintViolation();
         }
 
