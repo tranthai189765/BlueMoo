@@ -40,7 +40,7 @@ public class HomeSecurity {
     @Bean
     CorsConfigurationSource corsConfigurationSource() { // ✅ Khai báo corsConfigurationSource() ở đây
         CorsConfiguration config = new CorsConfiguration();
-        config.setAllowedOrigins(List.of("*")); // ✅ Cho phép React truy cập
+        config.setAllowedOrigins(List.of("https://frontend-blue-rust.vercel.app")); // ✅ Cho phép React truy cập
         config.setAllowedMethods(List.of("GET", "POST", "PUT", "DELETE", "OPTIONS"));
         config.setAllowedHeaders(List.of("*"));
         config.setAllowCredentials(true);
